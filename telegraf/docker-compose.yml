@@ -1,0 +1,13 @@
+version: "3.0"
+
+services:
+  telegraf:
+    image: telegraf:1.16.0
+    restart: always
+    container_name: telegraf
+    hostname: telegraf
+    ports:
+      - 9273:9273
+    volumes:
+      - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf
+    command: telegraf --config /etc/telegraf/telegraf.conf
