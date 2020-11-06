@@ -33,3 +33,13 @@ services:
     volumes:
       - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
     command: --config.file=/etc/prometheus/prometheus.yml
+  python-exporter:
+    image: python:3.8.5-alpine3.12
+    restart: always
+    container_name: python-exporter
+    hostname: python-exporter
+    ports:
+      - 9275:8000
+    volumes:
+      - ./python/metrics:/metrics
+    command: python -m http.server
