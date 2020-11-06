@@ -1,4 +1,0 @@
-# HELP demo_metric demo
-# TYPE demo_metric gauge
-demo_metric{host="demo",a="3",b="4"} 10
-demo_metric{host="demo",a="1",b="2"} 20
