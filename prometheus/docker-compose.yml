@@ -43,3 +43,10 @@ services:
     ports:
       - 9275:8000
     command: python app.py
+  pushgateway:
+    image: prom/pushgateway:latest
+    restart: always
+    container_name: pushgateway
+    hostname: pushgateway
+    ports:
+      - 9091:9091
