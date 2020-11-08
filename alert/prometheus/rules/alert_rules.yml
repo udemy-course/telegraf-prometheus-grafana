@@ -1,0 +1,8 @@
+groups:
+  - name: example
+    rules:
+      - alert: PacketLoss > 0
+        expr: ping_percent_packet_loss != 0
+        for: 2m
+        labels:
+          severity: urgent

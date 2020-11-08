@@ -1,0 +1,11 @@
+global:
+  scrape_interval: 5s
+
+rule_files:
+  - rules/alert_rules.yml
+
+scrape_configs:
+  - job_name: "telegraf"
+    static_configs:
+      - targets:
+          - telegraf:9273
