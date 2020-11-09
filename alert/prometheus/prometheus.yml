@@ -4,6 +4,7 @@ global:
 
 rule_files:
   - rules/alert_rules.yml
+  - rules/recording_rules.yml
 
 scrape_configs:
   - job_name: "telegraf"

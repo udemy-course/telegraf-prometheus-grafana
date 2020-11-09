@@ -1,0 +1,5 @@
+groups:
+  - name: demo-recording
+    rules:
+      - record: demo_recording_net_rate_bps
+        expr: rate(net_bytes_recv[2m])*8
