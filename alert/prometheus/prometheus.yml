@@ -1,5 +1,6 @@
 global:
-  scrape_interval: 5s
+  scrape_interval: 10s
+  evaluation_interval: 15s
 
 rule_files:
   - rules/alert_rules.yml
