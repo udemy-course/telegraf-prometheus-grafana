@@ -1,0 +1,6 @@
+route:
+  receiver: demo
+
+receivers:
+  - name: demo
+    email_configs:
