@@ -4,3 +4,10 @@ route:
 receivers:
   - name: demo
     email_configs:
+      - to: udemy.tpg@gmail.com
+        from: udemy.tpg@gmail.com
+        smarthost: smtp.gmail.com:587
+        auth_username: udemy.tpg@gmail.com
+        auth_identity: udemy.tpg@gmail.com
+        auth_password: enxvroebuxcueipc
+        send_resolved: true
