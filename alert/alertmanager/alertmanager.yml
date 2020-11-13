@@ -1,8 +1,19 @@
 route:
-  receiver: demo
+  receiver: email-default
+  # All alerts that do not match the following child routes
+  # will remain at the root node and be dispatched to 'email-default'.
+  routes:
+    # All alerts with severity=warn
+    - receiver: "slack-warn"
+      match_re:
+        severity: warn
+    # All alerts with everity=urgent match this sub-route.
+    - receiver: "slack-urgent"
+      match:
+        severity: urgent
 
 receivers:
-  - name: demo
+  - name: email-default
     email_configs:
       - to: udemy.tpg@gmail.com
         from: udemy.tpg@gmail.com
@@ -11,13 +22,17 @@ receivers:
         auth_identity: udemy.tpg@gmail.com
         auth_password: bqasapppnkkwnfzf
         send_resolved: true
+  - name: slack-warn
     slack_configs:
       - channel: "#alert-warn"
         api_url: https://hooks.slack.com/services/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
         title_link: http://127.0.0.1:9093/#/alerts
-        title: "{{ range .Alerts }}{{ .Annotations.description }}\n{{ end }}"
         text: "{{ range .Alerts }}{{ .Annotations.description }}\n{{ end }}"
         send_resolved: true
+  - name: slack-urgent
+    slack_configs:
       - channel: "#alert-urgent"
         api_url: https://hooks.slack.com/services/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
+        title_link: http://127.0.0.1:9093/#/alerts
+        text: "{{ range .Alerts }}{{ .Annotations.description }}\n{{ end }}"
         send_resolved: true
