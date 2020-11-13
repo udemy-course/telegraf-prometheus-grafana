@@ -9,5 +9,15 @@ receivers:
         smarthost: smtp.gmail.com:587
         auth_username: udemy.tpg@gmail.com
         auth_identity: udemy.tpg@gmail.com
-        auth_password: enxvroebuxcueipc
+        auth_password: bqasapppnkkwnfzf
+        send_resolved: true
+    slack_configs:
+      - channel: "#alert-warn"
+        api_url: https://hooks.slack.com/services/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
+        title_link: http://127.0.0.1:9093/#/alerts
+        title: "{{ range .Alerts }}{{ .Annotations.description }}\n{{ end }}"
+        text: "{{ range .Alerts }}{{ .Annotations.description }}\n{{ end }}"
+        send_resolved: true
+      - channel: "#alert-urgent"
+        api_url: https://hooks.slack.com/services/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
         send_resolved: true

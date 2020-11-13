@@ -5,9 +5,18 @@ groups:
         expr: ping_percent_packet_loss != 0
         for: 2m
         labels:
-          severity: urgent
+          severity: warn
+          function: ping
         annotations:
           description: packet loss to {{ $labels.url }} has reached {{ $value }}%
+      - alert: ping unreachalbe
+        expr: ping_result_code == 1
+        for: 2m
+        labels:
+          severity: urgent
+          function: ping
+        annotations:
+          description: ICMP unreachable to {{ $labels.url }}
       - alert: net_input_rate_bps > 2000
         expr: demo_recording_net_rate_bps > 2000
         for: 2m
