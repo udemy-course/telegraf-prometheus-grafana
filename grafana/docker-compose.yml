@@ -1,0 +1,39 @@
+version: "3.0"
+
+services:
+  telegraf:
+    image: telegraf:1.16.0
+    restart: unless-stopped
+    container_name: telegraf
+    hostname: telegraf
+    ports:
+      - 9273:9273
+    volumes:
+      - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf
+      - ./telegraf/telegraf.d/:/etc/telegraf/telegraf.d/
+    command: telegraf --config /etc/telegraf/telegraf.conf --config-directory /etc/telegraf/telegraf.d
+  prometheus:
+    image: prom/prometheus:latest
+    restart: unless-stopped
+    container_name: prometheus
+    hostname: prometheus
+    ports:
+      - 9090:9090
+    volumes:
+      - ./prometheus:/etc/prometheus
+    command: --config.file=/etc/prometheus/prometheus.yml
+  host1:
+    image: busybox:latest
+    restart: unless-stopped
+    container_name: host1
+    hostname: host1
+    command: sh -c "while true; do sleep 3600; done"
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    hostname: grafana
+    restart: unless-stopped
+    ports:
+      - 3000:3000
+    env_file:
+      - ./grafana/config.monitoring
