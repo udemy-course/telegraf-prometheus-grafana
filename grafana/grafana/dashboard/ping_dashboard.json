@@ -23,7 +23,7 @@
       "fieldConfig": {
         "defaults": {
           "custom": {},
-          "decimals": 1,
+          "decimals": 0,
           "mappings": [],
           "min": 0,
           "thresholds": {
@@ -35,7 +35,7 @@
               },
               {
                 "color": "red",
-                "value": 80
+                "value": 70
               }
             ]
           },
@@ -204,7 +204,7 @@
               },
               {
                 "color": "red",
-                "value": 200
+                "value": 150
               }
             ]
           },
@@ -470,6 +470,139 @@
         "align": false,
         "alignLevel": null
       }
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": "left",
+            "displayMode": "color-background",
+            "filterable": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 200
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Average"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "red",
+                      "value": 150
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 21
+      },
+      "id": 18,
+      "options": {
+        "showHeader": true
+      },
+      "pluginVersion": "7.2.0",
+      "targets": [
+        {
+          "expr": "ping_average_response_ms",
+          "format": "table",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        },
+        {
+          "expr": "ping_maximum_response_ms",
+          "format": "table",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "B"
+        },
+        {
+          "expr": "ping_minimum_response_ms",
+          "format": "table",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "C"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Ping Response Time",
+      "transformations": [
+        {
+          "id": "filterFieldsByName",
+          "options": {
+            "include": {
+              "names": [
+                "url",
+                "Value #A",
+                "Value #B",
+                "Value #C"
+              ]
+            }
+          }
+        },
+        {
+          "id": "seriesToColumns",
+          "options": {
+            "byField": "url"
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "indexByName": {
+              "Value #A": 1,
+              "Value #B": 2,
+              "Value #C": 3,
+              "url": 0
+            },
+            "renameByName": {
+              "Value #A": "Average",
+              "Value #B": "Maximum",
+              "Value #C": "Minimum",
+              "url": "URL"
+            }
+          }
+        }
+      ],
+      "type": "table"
     }
   ],
   "refresh": "1m",
@@ -487,5 +620,5 @@
   "timezone": "",
   "title": "Ping Dashboard",
   "uid": "mhwGd5TMz",
-  "version": 2
+  "version": 3
 }
