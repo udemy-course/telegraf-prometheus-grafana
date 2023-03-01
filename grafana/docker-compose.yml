@@ -29,7 +29,7 @@ services:
     hostname: host1
     command: sh -c "while true; do sleep 3600; done"
   grafana:
-    image: grafana/grafana
+    image: grafana/grafana:7.5.16
     container_name: grafana
     hostname: grafana
     restart: unless-stopped
